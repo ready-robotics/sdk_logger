@@ -2,6 +2,7 @@
 
 #include "sdk_logger/ros_sink.hpp"
 
+#include <cstdio>
 #include <mutex>
 
 namespace sdk_logger {
@@ -25,4 +26,20 @@ std::shared_ptr<logger> default_logger()
     return _logger;
 }
 
+void info(const char *format, ...)
+{
+    va_list args1;
+    va_start(args1, format);
+
+    va_list args2;
+    va_copy(args2, args1);
+
+    char buf[1+vsnprintf(NULL, 0, format, args1)];
+    va_end(args1);
+
+    vsnprintf(buf, sizeof(buf), format, args2);
+    va_end(args2);
+
+    default_logger()->info(buf);
+}
 } // namespace sdk_logger

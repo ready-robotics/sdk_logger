@@ -22,11 +22,7 @@ inline void trace(string_view format, Args &&... args)
     default_logger()->trace(format, std::forward<Args>(args)...);
 }
 
-template <typename... Args>
-inline void info(string_view format, Args &&... args)
-{
-    default_logger()->info(format, std::forward<Args>(args)...);
-}
+void info(const char *format, ...);
 
 template <typename... Args>
 inline void warn(string_view format, Args &&... args)

@@ -29,11 +29,12 @@ int main(int argc, char **argv)
        << "world"
        << "!!!!!";
 
-    sdk_logger::info(ss.str());
+    sdk_logger::info(ss.str().c_str());
     sdk_logger::debug("GOODBYE {} EVERYTHING", 2);
     sdk_logger::warn("GAH!");
     sdk_logger::error("...I don't feel so good");
     sdk_logger::critical("{}", DeathRattle());
+    sdk_logger::info("%d: %s -- %f\n\n", 2, ss.str().c_str(), 3.141);
 
     ros::spin();
     return 0;
