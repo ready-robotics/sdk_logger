@@ -20,7 +20,8 @@ std::shared_ptr<logger> default_logger()
     }
 
     auto ros_sink = std::make_shared<RosSink<std::mutex>>();
-    _logger = std::make_shared<spdlog::logger>("<SDK>", ros_sink);
+    _logger = std::make_shared<spdlog::logger>("SDK", ros_sink);
+    _logger->set_pattern("<%n> %v");
     return _logger;
 }
 

@@ -14,27 +14,29 @@ protected:
         spdlog::memory_buf_t formatted;
         spdlog::sinks::base_sink<Mutex>::formatter_->format(msg, formatted);
         std::string message = fmt::to_string(formatted);
+        /* Strip off trailing newline */
+        int length = message.size() - 1;
 
         switch (msg.level) {
         case spdlog::level::level_enum::off:
             break;
         case spdlog::level::level_enum::debug:
-            ROS_DEBUG("%s", message.c_str());
+            ROS_DEBUG("%.*s", length, message.c_str());
             break;
         case spdlog::level::level_enum::trace:
-            ROS_DEBUG("%s", message.c_str());
+            ROS_DEBUG("%.*s", length, message.c_str());
             break;
         case spdlog::level::level_enum::info:
-            ROS_INFO("%s", message.c_str());
+            ROS_INFO("%.*s", length, message.c_str());
             break;
         case spdlog::level::level_enum::warn:
-            ROS_WARN("%s", message.c_str());
+            ROS_WARN("%.*s", length, message.c_str());
             break;
         case spdlog::level::level_enum::err:
-            ROS_ERROR("%s", message.c_str());
+            ROS_ERROR("%.*s", length, message.c_str());
             break;
         case spdlog::level::level_enum::critical:
-            ROS_FATAL("%s", message.c_str());
+            ROS_FATAL("%.*s", length, message.c_str());
             break;
         case spdlog::level::level_enum::n_levels:
             break;
