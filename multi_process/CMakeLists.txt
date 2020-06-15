@@ -13,7 +13,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS} -std=c++11")
 
 
 set(LOG_PROCESS_EXE log_process)
-set(USER_PROCESS_EXE user_process)
+set(PROCESS_ONE_EXE user_process)
 
 include_directories(
     ../spdlog/include
@@ -24,10 +24,19 @@ add_executable(
 	log_process.cpp
 )
 
+target_link_libraries(
+    ${LOG_PROCESS_EXE}
+    execinfo
+)
+
 add_executable(
 	${PROCESS_ONE_EXE}
 	user_process.cpp
 )
 
 
+target_link_libraries(
+    ${PROCESS_ONE_EXE}
+    execinfo
+)
 
